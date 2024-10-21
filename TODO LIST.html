@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Your Interactive To-Do List</title>
+
+    
+    <style>
+        
+        body {
+            
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: left;
+            height: 100vh;
+        }
+
+        .todo-container {
+            background: #fffdfd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #eee;
+            margin: 10px 0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 4px;
+        }
+
+        ul li input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #2835a7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2b2188;
+        }
+    </style>
+</head>
+<body>
+
+<div class="todo-container">
+    <h1>Welcome to Your To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Please Add Your task...">
+    <button onclick="addTask()">Add Your Task</button>
+
+    <ul id="todoList">
+        <!-- Tasks will appear here -->
+    </ul>
+</div>
+
+<script>
+    function addTask() {
+        const taskInput = document.getElementById('taskInput');
+        const taskText = taskInput.value.trim();
+        if (taskText !== "") {
+            const listItem = document.createElement('li');
+
+            // Create a checkbox
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    listItem.style.textDecoration = "line-through";
+                } else {
+                    listItem.style.textDecoration = "none";
+                }
+            });
+
+            // Create a text node for the task
+            const task = document.createTextNode(taskText);
+
+            listItem.appendChild(checkbox);
+            listItem.appendChild(task);
+
+            // Add the list item to the list
+            document.getElementById('todoList').appendChild(listItem);
+
+            // Clear the input field
+            taskInput.value = "";
+        }
+    }
+</script>
+
+</body>
+</html>
